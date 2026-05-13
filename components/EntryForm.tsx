@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import type { KPI } from '@/lib/kpis'
 import { computeFlag, FlagPill, fmt } from '@/components/KpiTable'
-import { useRole } from '@/app/layout'
 
 interface EntryHistory {
   id: number

@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 
 // ── Role context ────────────────────────────────────────────────────────────
 export const RoleContext = createContext<{ role: string; setRole: (r: string) => void }>({ role: 'COO', setRole: () => {} })
-export function useRole() { return useContext(RoleContext) }
 
 const ROLES = ['COO', 'CFO', 'Field Lead', 'Sponsor (read-only)']
 const ROLE_COLORS: Record<string, string> = {

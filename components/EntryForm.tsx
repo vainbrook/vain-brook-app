@@ -1,7 +1,8 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import type { KPI } from '@/lib/kpis'
 import { computeFlag, FlagPill, fmt } from '@/components/KpiTable'
+import { RoleContext } from '@/lib/RoleContext'
 
 interface EntryHistory {
   id: number
@@ -17,7 +18,7 @@ function EntryCard({ kpi, latestVal, onSaved }: {
   latestVal: number | null
   onSaved: () => void
 }) {
-  const { role } = useRole()
+  const { role } = useContext(RoleContext)
   const [value, setValue] = useState('')
   const [note, setNote] = useState('')
   const [saving, setSaving] = useState(false)
@@ -93,14 +94,12 @@ function EntryCard({ kpi, latestVal, onSaved }: {
             onChange={e => setValue(e.target.value)}
           />
           <span className="entry-unit">{kpi.unit}</span>
-          {previewFlag && (
-            <FlagPill flag={previewFlag} />
-          )}
+          {previewFlag && <FlagPill flag={previewFlag} />}
         </div>
 
         {previewFlag === 'red' && (
           <div className="red-threshold">
-            ⚠ {kpi.redLabel}
+            ▲ {kpi.redLabel}
           </div>
         )}
 
@@ -125,9 +124,7 @@ function EntryCard({ kpi, latestVal, onSaved }: {
           >
             {showHistory ? 'Hide history' : 'View history'}
           </button>
-          {saved && (
-            <span className="entry-confirm">✓ Saved successfully</span>
-          )}
+          {saved && <span className="entry-confirm">✓ Saved successfully</span>}
         </div>
 
         {showHistory && (

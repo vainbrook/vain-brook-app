@@ -1,5 +1,6 @@
 'use client'
-import type { Flag, KPI } from '@/lib/kpis'
+import type { Flag, KPI } from "@/lib/kpis"
+import { getFlag } from "@/lib/kpis"
 
 export function FlagPill({ flag }: { flag: Flag }) {
   if (flag === 'none') return <span className="flag-pill fp-none">No data</span>
@@ -17,7 +18,7 @@ export function FlagDot({ flag }: { flag: Flag }) {
 
 export function computeFlag(kpi: KPI, value: number | null): Flag {
   if (value === null) return 'none'
-  return kpi.checkFlag(value)
+  return getFlag(kpi, value)
 }
 
 export function fmt(v: number | null, decimals = 1): string {
